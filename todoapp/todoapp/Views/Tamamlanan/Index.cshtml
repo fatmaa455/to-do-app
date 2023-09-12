@@ -1,0 +1,333 @@
+﻿
+@model PagedList.IPagedList<todoapp.Models.GOREV>
+@using PagedList.Mvc;
+@using todoapp.Models;
+
+@*
+    @using todoapp.Models;
+    @model List<TAMAMLANAN>
+*@
+
+@{
+    ViewBag.Title = "Tamamlanan Görevler";
+}
+
+@section body{
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">GÖREV SİL</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="mesaj"></p>
+                    <p class="hata"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal</button>
+                    <button type="button" class="btn btn-primary gorevSil">Evet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">GÖREV YILDIZLA</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="mesaj"></p>
+                    <p class="hata"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal</button>
+                    <button type="button" class="btn btn-primary gorevOnemli">Evet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">GÖREV TAMAMLA</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="mesaj"></p>
+                    <p class="hata"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal</button>
+                    <button type="button" class="btn btn-primary gorevTamamla">Evet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<h3><i class="fa fa-check">&nbsp;</i>Tamamlanan Görevler</h3>
+
+<a href="/Tamamlanan/gorevEkle" style="text-decoration: none;color:blue">Yeni Görev Ekle</a>
+
+<table border="1" width="100%" border-collapse=collapse class="tablo">
+    <thead>
+        <tr>
+            <th width="1%">Önemli</th>
+            <th width="1%">Görev Tamamla</th>
+            <th width="20%">Görev Adı</th>
+            <th width="20%">Görev Tarihi</th>
+            <th width="1%">Görev Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var g in Model)
+        {
+            if (g.tamamlananId != ' ' && g.tamamlananId != null)
+            {
+                <tr>
+
+                    @if (g.onemliId != ' ' && g.onemliId != null)
+                    {
+                        <td><a href="#" data-toggle="modal" data-target="#exampleModal2" data-grvId="@g.gorevId" data-grvAdi="@g.gorevAdi" class="grvOnemli2"><i class="fa fa-star"></i></a></td>
+                    }
+                    else
+                    {
+                        <td><a href="#" data-toggle="modal" data-target="#exampleModal2" data-grvId="@g.gorevId" data-grvAdi="@g.gorevAdi" class="grvOnemli"><i class="far fa-star"></i></a></td>
+                    }
+
+                    @if (g.tamamlananId != ' ' && g.tamamlananId != null)
+                    {
+                        <td><a href="#" data-toggle="modal" data-target="#exampleModal3" data-grvId="@g.gorevId" data-grvAdi="@g.gorevAdi" class="grvTamamla2"><i class="fa fa-check-circle"></i></a></td>
+                    }
+                    else
+                    {
+                        <td><a href="#" data-toggle="modal" data-target="#exampleModal3" data-grvId="@g.gorevId" data-grvAdi="@g.gorevAdi" class="grvTamamla"><i class="fa fa-circle"></i></a></td>
+                    }
+
+                    <td> @g.gorevAdi </td>
+
+                    @if (g.gorevTarihi >= DateTime.Now)
+                    {
+                        <td>@g.gorevTarihiString</td>
+                    }
+                    else if (g.gorevTarihi < DateTime.Now)
+                    {
+                        <td>Süresi Geçmiş (@g.gorevTarihiString)</td>
+                    }
+                    else
+                    {
+                        <td>Tarih Belirtilmemiş</td>
+                    }
+
+                    <td><a href="#" data-toggle="modal" data-target="#exampleModal" data-grvId="@g.gorevId" data-grvAdi="@g.gorevAdi" class="grvSil"><i class="fa fa-trash"></i></a></td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<br>
+<br>
+
+<h3><i class="fa fa-check">&nbsp;</i>Tamamlanmayan Görevler</h3>
+
+<table border="1" width="100%" border-collapse=collapse class="tablo">
+    <thead>
+        <tr>
+            <th width="1%">Önemli</th>
+            <th width="1%">Görev Tamamla</th>
+            <th width="20%">Görev Adı</th>
+            <th width="20%">Görev Tarihi</th>
+            <th width="1%">Görev Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var g in Model)
+        {
+            if (g.tamamlananId == ' ' || g.tamamlananId == null)
+            {
+                <tr>
+
+                    @if (g.onemliId != ' ' && g.onemliId != null)
+                    {
+                        <td><a href="#" data-toggle="modal" data-target="#exampleModal2" data-grvId="@g.gorevId" data-grvAdi="@g.gorevAdi" class="grvOnemli2"><i class="fa fa-star"></i></a></td>
+                    }
+                    else
+                    {
+                        <td><a href="#" data-toggle="modal" data-target="#exampleModal2" data-grvId="@g.gorevId" data-grvAdi="@g.gorevAdi" class="grvOnemli"><i class="far fa-star"></i></a></td>
+                    }
+
+                    @if (g.tamamlananId != ' ' && g.tamamlananId != null)
+                    {
+                        <td><a href="#" data-toggle="modal" data-target="#exampleModal3" data-grvId="@g.gorevId" data-grvAdi="@g.gorevAdi" class="grvTamamla2"><i class="fa fa-check-circle"></i></a></td>
+                    }
+                    else
+                    {
+                        <td><a href="#" data-toggle="modal" data-target="#exampleModal3" data-grvId="@g.gorevId" data-grvAdi="@g.gorevAdi" class="grvTamamla"><i class="fa fa-circle"></i></a></td>
+                    }
+
+                    <td> @g.gorevAdi </td>
+
+                    @if (g.gorevTarihi >= DateTime.Now)
+                    {
+                        <td>@g.gorevTarihiString</td>
+                    }
+                    else if (g.gorevTarihi < DateTime.Now)
+                    {
+                        <td>Süresi Geçmiş (@g.gorevTarihiString)</td>
+                    }
+                    else
+                    {
+                        <td>Tarih Belirtilmemiş</td>
+                    }
+
+                    <td><a href="#" data-toggle="modal" data-target="#exampleModal" data-grvId="@g.gorevId" data-grvAdi="@g.gorevAdi" class="grvSil"><i class="fa fa-trash"></i></a></td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = Model.PageSize }))
+Toplam @Model.PageCount adet sayfa var.
+<br>
+Toplam @Model.TotalItemCount kayıt var.
+<br>
+Bu sayfada @Model.FirstItemOnPage ile @Model.LastItemOnPage arası kayıtlar gösteriliyor.
+<br>
+
+@section scripts{
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <script>
+        $(".grvSil").click(
+            function () {
+                $(".modal-body>p.hata").html = "";
+                var gorev = $(this).attr("data-grvAdi");
+                $(".modal-body>p.mesaj").html(gorev + " silinsin mi?");
+                var gorevID = $(this).attr("data-grvId");
+                $(".gorevSil").data("gorevId", gorevID);
+            }
+        );
+
+        $(".gorevSil").click(
+            function () {
+                var id = $(this).data("gorevId");
+                $.ajax(
+                    {
+                        type: "POST",
+                        url: "/Gorevler/gorevSil/" + id,
+                        success: function (param) {
+                            if (param == 1) {
+                                window.location.replace("/Tamamlanan/Index");
+                            }
+                            else {
+                                $(".modal-body>p.hata").html("Hata !!!");
+                            }
+                        }
+                    }
+                );
+            }
+        );
+
+        $(".grvOnemli").click(
+            function () {
+                $(".modal-body>p.hata").html = "";
+                var gorev = $(this).attr("data-grvAdi");
+                $(".modal-body>p.mesaj").html(gorev + " yıldızlansın mı?");
+                var gorevID = $(this).attr("data-grvId");
+                $(".gorevOnemli").data("gorevId", gorevID);
+            }
+        );
+
+        $(".gorevOnemli").click(
+            function () {
+                var id = $(this).data("gorevId");
+                $.ajax(
+                    {
+                        type: "POST",
+                        url: "/Gorevler/gorevYildizla/" + id,
+                        success: function (param) {
+                            if (param == 1) {
+                                window.location.replace("/Tamamlanan/Index");
+                            }
+                            else {
+                                $(".modal-body>p.hata").html("Hata !!!");
+                            }
+                        }
+                    }
+                );
+            }
+        );
+
+
+        $(".grvOnemli2").click(
+            function () {
+                $(".modal-body>p.hata").html = "";
+                var gorev = $(this).attr("data-grvAdi");
+                $(".modal-body>p.mesaj").html(gorev + " yıldızı kaldırılsın mı?");
+                var gorevID = $(this).attr("data-grvId");
+                $(".gorevOnemli").data("gorevId", gorevID);
+            }
+        );
+
+        $(".grvTamamla").click(
+            function () {
+                $(".modal-body>p.hata").html = "";
+                var gorev = $(this).attr("data-grvAdi");
+                $(".modal-body>p.mesaj").html(gorev + " tamamlandı mı?");
+                var gorevID = $(this).attr("data-grvId");
+                $(".gorevTamamla").data("gorevId", gorevID);
+            }
+        );
+
+        $(".gorevTamamla").click(
+            function () {
+                var id = $(this).data("gorevId");
+                $.ajax(
+                    {
+                        type: "POST",
+                        url: "/Gorevler/gorevTamamla/" + id,
+                        success: function (param) {
+                            if (param == 1) {
+                                window.location.replace("/Tamamlanan/Index");
+                            }
+                            else {
+                                $(".modal-body>p.hata").html("Hata !!!");
+                            }
+                        }
+                    }
+                );
+            }
+        );
+
+        $(".grvTamamla2").click(
+            function () {
+                $(".modal-body>p.hata").html = "";
+                var gorev = $(this).attr("data-grvAdi");
+                $(".modal-body>p.mesaj").html(gorev + " tamamlanmadı mı?");
+                var gorevID = $(this).attr("data-grvId");
+                $(".gorevTamamla").data("gorevId", gorevID);
+            }
+        );
+
+    </script>
+
+}
+
+
+

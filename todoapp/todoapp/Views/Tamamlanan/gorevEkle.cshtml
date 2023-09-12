@@ -1,0 +1,40 @@
+﻿
+
+@using todoapp.Models;
+@model GOREV
+
+
+@{
+    ViewBag.Title = "Görev Ekle";
+}
+
+<h3>Görev Ekle</h3>
+
+<form action="/Tamamlanan/gorevEkle" method="post" enctype="multipart/form-data">
+
+    <div>
+        <input type="hidden" value="@Model.gorevId" id="gorevId" name="gorevId" />
+    </div>
+
+    <div>
+        <label for="gorevAdi">Görev Adı: </label>
+        <br />
+        <input type="text" value="@Model.gorevAdi" id="gorevAdi" name="gorevAdi" width="100%" required />
+    </div>
+
+    <br />
+
+    <div>
+        <label for="gorevTarihi">Görev Tarihi: </label>
+        <br />
+        <input type="date" value="@Model.gorevTarihi" id="gorevTarihi" name="gorevTarihi" width="100%" />
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-info">Görev Ekle</button>
+
+    <a class="btn btn-info" href="/Tamamlanan/Index">Vazgeç</a>
+
+</form>
+

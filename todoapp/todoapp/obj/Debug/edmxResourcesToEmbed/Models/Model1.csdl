@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="todoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="GOREV">
+    <Key>
+      <PropertyRef Name="gorevId" />
+    </Key>
+    <Property Name="gorevId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="gorevAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="gorevTarihi" Type="DateTime" Precision="0" />
+    <Property Name="animsat" Type="DateTime" Precision="3" />
+    <Property Name="yinele" Type="DateTime" Precision="3" />
+    <Property Name="onemliId" Type="Int32" />
+    <Property Name="tamamlananId" Type="Int32" />
+    <Property Name="planlananId" Type="Int32" />
+    <Property Name="listeId" Type="Int32" />
+    <NavigationProperty Name="LISTE" Relationship="Self.FK__GOREV__listeId__36B12243" FromRole="GOREV" ToRole="LISTE" />
+    <NavigationProperty Name="ONEMLI" Relationship="Self.FK__GOREV__onemliId__29572725" FromRole="GOREV" ToRole="ONEMLI" />
+    <NavigationProperty Name="PLANLANAN" Relationship="Self.FK__GOREV__planlanan__2B3F6F97" FromRole="GOREV" ToRole="PLANLANAN" />
+    <NavigationProperty Name="TAMAMLANAN" Relationship="Self.FK__GOREV__tamamlana__2A4B4B5E" FromRole="GOREV" ToRole="TAMAMLANAN" />
+  </EntityType>
+  <EntityType Name="LISTE">
+    <Key>
+      <PropertyRef Name="listeId" />
+    </Key>
+    <Property Name="listeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="listeAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="GOREV" Relationship="Self.FK__GOREV__listeId__36B12243" FromRole="LISTE" ToRole="GOREV" />
+  </EntityType>
+  <EntityType Name="ONEMLI">
+    <Key>
+      <PropertyRef Name="onemliId" />
+    </Key>
+    <Property Name="onemliId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="GOREV" Relationship="Self.FK__GOREV__onemliId__29572725" FromRole="ONEMLI" ToRole="GOREV" />
+  </EntityType>
+  <EntityType Name="PLANLANAN">
+    <Key>
+      <PropertyRef Name="planlananId" />
+    </Key>
+    <Property Name="planlananId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="GOREV" Relationship="Self.FK__GOREV__planlanan__2B3F6F97" FromRole="PLANLANAN" ToRole="GOREV" />
+  </EntityType>
+  <EntityType Name="TAMAMLANAN">
+    <Key>
+      <PropertyRef Name="tamamlananId" />
+    </Key>
+    <Property Name="tamamlananId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="GOREV" Relationship="Self.FK__GOREV__tamamlana__2A4B4B5E" FromRole="TAMAMLANAN" ToRole="GOREV" />
+  </EntityType>
+  <Association Name="FK__GOREV__listeId__36B12243">
+    <End Role="LISTE" Type="Self.LISTE" Multiplicity="0..1" />
+    <End Role="GOREV" Type="Self.GOREV" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LISTE">
+        <PropertyRef Name="listeId" />
+      </Principal>
+      <Dependent Role="GOREV">
+        <PropertyRef Name="listeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__GOREV__onemliId__29572725">
+    <End Role="ONEMLI" Type="Self.ONEMLI" Multiplicity="0..1" />
+    <End Role="GOREV" Type="Self.GOREV" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ONEMLI">
+        <PropertyRef Name="onemliId" />
+      </Principal>
+      <Dependent Role="GOREV">
+        <PropertyRef Name="onemliId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__GOREV__planlanan__2B3F6F97">
+    <End Role="PLANLANAN" Type="Self.PLANLANAN" Multiplicity="0..1" />
+    <End Role="GOREV" Type="Self.GOREV" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PLANLANAN">
+        <PropertyRef Name="planlananId" />
+      </Principal>
+      <Dependent Role="GOREV">
+        <PropertyRef Name="planlananId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__GOREV__tamamlana__2A4B4B5E">
+    <End Role="TAMAMLANAN" Type="Self.TAMAMLANAN" Multiplicity="0..1" />
+    <End Role="GOREV" Type="Self.GOREV" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TAMAMLANAN">
+        <PropertyRef Name="tamamlananId" />
+      </Principal>
+      <Dependent Role="GOREV">
+        <PropertyRef Name="tamamlananId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="todoEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="GOREV" EntityType="Self.GOREV" />
+    <EntitySet Name="LISTE" EntityType="Self.LISTE" />
+    <EntitySet Name="ONEMLI" EntityType="Self.ONEMLI" />
+    <EntitySet Name="PLANLANAN" EntityType="Self.PLANLANAN" />
+    <EntitySet Name="TAMAMLANAN" EntityType="Self.TAMAMLANAN" />
+    <AssociationSet Name="FK__GOREV__listeId__36B12243" Association="Self.FK__GOREV__listeId__36B12243">
+      <End Role="LISTE" EntitySet="LISTE" />
+      <End Role="GOREV" EntitySet="GOREV" />
+    </AssociationSet>
+    <AssociationSet Name="FK__GOREV__onemliId__29572725" Association="Self.FK__GOREV__onemliId__29572725">
+      <End Role="ONEMLI" EntitySet="ONEMLI" />
+      <End Role="GOREV" EntitySet="GOREV" />
+    </AssociationSet>
+    <AssociationSet Name="FK__GOREV__planlanan__2B3F6F97" Association="Self.FK__GOREV__planlanan__2B3F6F97">
+      <End Role="PLANLANAN" EntitySet="PLANLANAN" />
+      <End Role="GOREV" EntitySet="GOREV" />
+    </AssociationSet>
+    <AssociationSet Name="FK__GOREV__tamamlana__2A4B4B5E" Association="Self.FK__GOREV__tamamlana__2A4B4B5E">
+      <End Role="TAMAMLANAN" EntitySet="TAMAMLANAN" />
+      <End Role="GOREV" EntitySet="GOREV" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

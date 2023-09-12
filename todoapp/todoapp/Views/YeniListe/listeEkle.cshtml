@@ -1,0 +1,31 @@
+﻿
+@using todoapp.Models;
+@model LISTE
+
+
+@{
+    ViewBag.Title = "Liste Ekle";
+}
+
+<h3>Liste Ekle</h3>
+
+<form action="/YeniListe/listeEkle" method="post" enctype="multipart/form-data">
+
+    <div>
+        <input type="hidden" value="@Model.listeId" id="listeId" name="listeId">
+    </div>
+
+    <div>
+        <label for="gorevAdi">Liste Adı: </label>
+        <br>
+        <input type="text" value="@Model.listeAdi" id="listeAdi" name="listeAdi" width="100%" required>
+    </div>
+
+    <br>
+
+    <br>
+    <button type="submit" class="btn btn-info">Liste Ekle</button>
+
+    <a class="btn btn-info" href="/YeniListe/Index">Vazgeç</a>
+
+</form>

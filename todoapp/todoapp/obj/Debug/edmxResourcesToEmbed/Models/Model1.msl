@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="todoModelStoreContainer" CdmEntityContainer="todoEntities1">
+    <EntitySetMapping Name="GOREV">
+      <EntityTypeMapping TypeName="todoModel.GOREV">
+        <MappingFragment StoreEntitySet="GOREV">
+          <ScalarProperty Name="gorevId" ColumnName="gorevId" />
+          <ScalarProperty Name="gorevAdi" ColumnName="gorevAdi" />
+          <ScalarProperty Name="gorevTarihi" ColumnName="gorevTarihi" />
+          <ScalarProperty Name="animsat" ColumnName="animsat" />
+          <ScalarProperty Name="yinele" ColumnName="yinele" />
+          <ScalarProperty Name="onemliId" ColumnName="onemliId" />
+          <ScalarProperty Name="tamamlananId" ColumnName="tamamlananId" />
+          <ScalarProperty Name="planlananId" ColumnName="planlananId" />
+          <ScalarProperty Name="listeId" ColumnName="listeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LISTE">
+      <EntityTypeMapping TypeName="todoModel.LISTE">
+        <MappingFragment StoreEntitySet="LISTE">
+          <ScalarProperty Name="listeId" ColumnName="listeId" />
+          <ScalarProperty Name="listeAdi" ColumnName="listeAdi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ONEMLI">
+      <EntityTypeMapping TypeName="todoModel.ONEMLI">
+        <MappingFragment StoreEntitySet="ONEMLI">
+          <ScalarProperty Name="onemliId" ColumnName="onemliId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PLANLANAN">
+      <EntityTypeMapping TypeName="todoModel.PLANLANAN">
+        <MappingFragment StoreEntitySet="PLANLANAN">
+          <ScalarProperty Name="planlananId" ColumnName="planlananId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TAMAMLANAN">
+      <EntityTypeMapping TypeName="todoModel.TAMAMLANAN">
+        <MappingFragment StoreEntitySet="TAMAMLANAN">
+          <ScalarProperty Name="tamamlananId" ColumnName="tamamlananId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

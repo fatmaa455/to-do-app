@@ -1,0 +1,18 @@
+﻿
+
+use todo
+
+DROP TABLE [KULLANICI]
+
+ALTER TABLE GOREV ALTER COLUMN  gorevTarihi date
+
+CREATE TABLE LISTE(
+listeId int IDENTITY(1,1) NOT NULL,
+listeAdi varchar(50) NOT NULL,
+PRIMARY KEY(listeId)
+)
+
+ALTER TABLE GOREV ADD listeId int
+
+ALTER TABLE GOREV
+ADD FOREIGN KEY (listeId) REFERENCES LISTE(listeId);
